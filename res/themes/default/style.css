@@ -1,0 +1,21 @@
+#centralWidget {
+	border-image: url(:/themes/default/glass.png) 20 stretch;
+	border-width: 20px;
+	padding: 2px;
+}
+
+Notify--Label { 
+	margin: 2px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.notifyLink {
+	color: #2b66dd;
+}
+
+.notifyText {
+	color: #000000;
+}

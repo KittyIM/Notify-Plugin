@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>glyphs/notify.png</file>
+        <file>themes/default/glass.png</file>
+        <file>themes/default/style.css</file>
+    </qresource>
+</RCC>

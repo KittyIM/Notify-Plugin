@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Notify::SettingsPage</class>
+ <widget class="KittySDK::ISettingsPage" name="Notify::SettingsPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>474</width>
+    <height>296</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Notify</string>
+  </property>
+  <property name="id" stdset="0">
+   <string>Plugin.Notify</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="settingsGroupBox">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::ExpandingFieldsGrow</enum>
+      </property>
+      <item row="2" column="0">
+       <widget class="QLabel" name="displayTimeLabel">
+        <property name="text">
+         <string>Notify display time:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="displayTimeSpinBox">
+        <property name="suffix">
+         <string> ms</string>
+        </property>
+        <property name="maximum">
+         <number>10000</number>
+        </property>
+        <property name="value">
+         <number>2500</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="limitLabel">
+        <property name="text">
+         <string>Notify limit (0 - no limit):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="limitSpinBox">
+        <property name="value">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="animationCheckBox">
+        <property name="text">
+         <string>Enable animation</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="fullscreenCheckBox">
+        <property name="text">
+         <string>Don't show when running fullscreen app</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="positionLabel">
+        <property name="text">
+         <string>Popup position:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QComboBox" name="positionComboBox">
+        <property name="currentIndex">
+         <number>3</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Top left</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Top right</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Bottom left</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Bottom right</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="themeGroupBox">
+     <property name="title">
+      <string>Theme</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::ExpandingFieldsGrow</enum>
+      </property>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="themePreviewPushButton">
+        <property name="text">
+         <string>Preview</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QComboBox" name="themeComboBox"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>80</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KittySDK::ISettingsPage</class>
+   <extends>QWidget</extends>
+   <header location="global">ISettingsPage.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
