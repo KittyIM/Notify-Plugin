@@ -13,9 +13,6 @@
   <property name="windowTitle">
    <string>Notify</string>
   </property>
-  <property name="id" stdset="0">
-   <string>Plugin.Notify</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="margin">
     <number>0</number>

@@ -22,6 +22,7 @@ namespace Notify
 
 			void apply();
 			void reset();
+			void retranslate();
 
 		signals:
 			void previewClicked(const QString &theme);

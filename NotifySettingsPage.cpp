@@ -19,6 +19,7 @@ SettingsPage::SettingsPage(KittySDK::IPluginCore *core, QWidget *parent):
 	connect(m_ui->themePreviewPushButton, SIGNAL(clicked()), SLOT(previewTheme()));
 
 	setIcon(Icons::I_NOTIFY);
+	setId(SettingPages::S_NOTIFY);
 }
 
 SettingsPage::~SettingsPage()
@@ -58,6 +59,11 @@ void SettingsPage::reset()
 			m_ui->themeComboBox->setCurrentIndex(m_ui->themeComboBox->count() - 1);
 		}
 	}
+}
+
+void SettingsPage::retranslate()
+{
+	m_ui->retranslateUi(this);
 }
 
 void SettingsPage::previewTheme()

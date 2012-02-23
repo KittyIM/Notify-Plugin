@@ -70,7 +70,7 @@ void Plugin::previewTheme(const QString &theme)
 {
 	setTheme(theme);
 	m_widget->addNotify(core()->icon(KittySDK::Icons::I_STATUS_ONLINE), tr("<b>Kate</b> is online"));
-	m_widget->addNotify(core()->icon(KittySDK::Icons::I_MESSAGE), tr("<a href=\"notify://showMessage\"><span class=\"notifyText\">Message from <b>Michael</b></span><br><span class=\"notifyLink\">\"Hey, I was wondering if the...\"</span></a>"));
+	m_widget->addNotify(core()->icon(KittySDK::Icons::I_MESSAGE), "<a href=\"notify://showMessage\"><span class=\"notifyText\">" + tr("Message from <b>Michael</b>") + "</span><br><span class=\"notifyLink\">" + tr("\"Hey, I was wondering if the...\"") + "</span></a>");
 	m_widget->addNotify(core()->icon(KittySDK::Icons::I_STATUS_AWAY), tr("<b>Mathew</b> is away"));
 	m_widget->addNotify(core()->icon(KittySDK::Icons::I_STATUS_FFC), tr("<b>Peter</b> changed his description<br>\"Runnin' wild.\""));
 	m_widget->addNotify(core()->icon(KittySDK::Icons::I_SMILEY), tr("kitty.im is happy"));
@@ -127,4 +127,3 @@ void Plugin::applySettings()
 
 KITTY_PLUGIN(Plugin)
 }
-

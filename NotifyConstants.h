@@ -16,7 +16,11 @@ namespace Notify
 		const char S_TIMEOUT[]			= "Notify.Timeout";
 		const char S_POSITION[]			= "Notify.Align";
 		const char S_THEME[]			= "Notify.Theme";
+	}
 
+	namespace SettingPages
+	{
+		const char S_NOTIFY[]				= "Plugins.Notify";
 	}
 }
 
