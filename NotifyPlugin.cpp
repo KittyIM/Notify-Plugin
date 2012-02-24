@@ -33,6 +33,10 @@ Plugin::~Plugin()
 void Plugin::init()
 {
 	core()->addIcon(Icons::I_NOTIFY, QPixmap(":/glyphs/notify.png"));
+
+	m_widget = new Widget();
+	connect(m_widget, SIGNAL(linkClicked(QString)), SLOT(handleLink(QString)));
+	applySettings();
 }
 
 void Plugin::load()
@@ -41,10 +45,6 @@ void Plugin::load()
 	connect(m_settings, SIGNAL(previewClicked(QString)), SLOT(previewTheme(QString)));
 	connect(m_settings, SIGNAL(applied()), SLOT(applySettings()));
 	core()->addSettingPage(m_settings, KittySDK::SettingPages::S_DISPLAY);
-
-	m_widget = new Widget();
-	connect(m_widget, SIGNAL(linkClicked(QString)), SLOT(handleLink(QString)));
-	applySettings();
 }
 
 void Plugin::unload()
@@ -83,7 +83,7 @@ void Plugin::previewTheme(const QString &theme)
 void Plugin::setTheme(const QString &theme)
 {
 	QString fileName = ":/themes/default/style.css";
-	if(theme != tr("Default")) {
+	if(!theme.isEmpty()) {
 		fileName = core()->kittyDir() + "/themes/notify/" + theme + "/style.css";
 	}
 
@@ -118,11 +118,11 @@ void Plugin::handleLink(const QString &link)
 
 void Plugin::applySettings()
 {
-	setTheme(core()->setting(Settings::S_THEME, tr("Default")).toString());
+	setTheme(core()->setting(Settings::S_THEME, "").toString());
 
 	m_widget->setAnimation(core()->setting(Settings::S_ANIMATION, false).toBool());
 	m_widget->setLimit(core()->setting(Settings::S_LIMIT, 20).toInt());
-	m_widget->setPosition(static_cast<Widget::Position>(core()->setting(Settings::S_POSITION).toInt()));
+	m_widget->setPosition(static_cast<Widget::Position>(core()->setting(Settings::S_POSITION, 3).toInt()));
 
 	//m_ui->fullscreenCheckBox->setChecked(core()->setting(Settings::S_FULLSCREEN, true).toBool());
 }

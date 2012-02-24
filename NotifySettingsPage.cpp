@@ -34,7 +34,7 @@ void SettingsPage::apply()
 	core()->setSetting(Settings::S_TIMEOUT, m_ui->displayTimeSpinBox->value());
 	core()->setSetting(Settings::S_LIMIT, m_ui->limitSpinBox->value());
 	core()->setSetting(Settings::S_POSITION, m_ui->positionComboBox->currentIndex());
-	core()->setSetting(Settings::S_THEME, m_ui->themeComboBox->currentText());
+	core()->setSetting(Settings::S_THEME, m_ui->themeComboBox->itemData(m_ui->themeComboBox->currentIndex()));
 
 	emit applied();
 }
@@ -68,7 +68,7 @@ void SettingsPage::retranslate()
 
 void SettingsPage::previewTheme()
 {
-	emit previewClicked(m_ui->themeComboBox->currentText());
+	emit previewClicked(m_ui->themeComboBox->itemData(m_ui->themeComboBox->currentIndex()).toString());
 }
 
 }
