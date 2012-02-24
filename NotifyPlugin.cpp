@@ -63,6 +63,8 @@ void Plugin::execAction(const QString &name, const QMap<QString, QVariant> &args
 		m_widget->addNotify(icon, text, timeout);
 	} else if(name == "showMessage") {
 		QMessageBox::information(0, tr("Notify clicked"), tr("You clicked message from Michael."));
+	} else if(name == "retranslate") {
+		m_info->setName(tr("Notify"));
 	}
 }
 
