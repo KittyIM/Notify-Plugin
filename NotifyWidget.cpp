@@ -63,7 +63,7 @@ void Widget::addNotify(const QPixmap &icon, const QString &text, int timeout)
 {
 	Label *label = new Label(icon, "<style type=\"text/css\">" + styleSheet() + "</style>" + text, timeout);
 	connect(label, SIGNAL(timeout()), SLOT(maybeRemove()));
-	connect(label, SIGNAL(linkClicked(QString)), SIGNAL(linkClicked(QString)));
+	connect(label, SIGNAL(linkClicked(QString)), SLOT(removeClicked(QString)));
 
 	if((m_limit > 0) && (m_layout->count() >= m_limit)) {
 		delete m_layout->takeAt(0)->widget();
@@ -168,6 +168,15 @@ void Widget::maybeRemove()
 			removeLabel(label);
 		}
 	}
+}
+
+void Widget::removeClicked(const QString &url)
+{
+	if(Label *label = qobject_cast<Label*>(sender())) {
+		removeLabel(label);
+	}
+
+	emit linkClicked(url);
 }
 
 void Widget::removeLabel(Label *label)

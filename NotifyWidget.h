@@ -62,6 +62,7 @@ namespace Notify
 
 		private slots:
 			void maybeRemove();
+			void removeClicked(const QString &url);
 			void removeLabel(Label *label);
 
 		private:

@@ -14,7 +14,10 @@
 namespace Notify
 {
 
-Plugin::Plugin(KittySDK::IPluginCore *pcore): KittySDK::IPlugin(pcore)
+Plugin::Plugin(KittySDK::IPluginCore *pcore):
+	KittySDK::IPlugin(pcore),
+	m_settings(0),
+	m_widget(0)
 {
 	m_info = new KittySDK::IPluginInfo();
 	m_info->setName(tr("Notify"));
