@@ -1,6 +1,7 @@
 #include "NotifyWidget.h"
 
 #include <QtCore/QPropertyAnimation>
+#include <QtCore/QPointer>
 #include <QtCore/QTimer>
 #include <QtCore/QDebug>
 #include <QtGui/QDesktopWidget>
@@ -61,7 +62,7 @@ Widget::Widget(QWidget *parent):
 
 void Widget::addNotify(const QPixmap &icon, const QString &text, int timeout)
 {
-	Label *label = new Label(icon, "<style type=\"text/css\">" + styleSheet() + "</style>" + text, timeout);
+	QPointer<Label> label = new Label(icon, "<style type=\"text/css\">" + styleSheet() + "</style>" + text, timeout);
 	connect(label, SIGNAL(timeout()), SLOT(maybeRemove()));
 	connect(label, SIGNAL(linkClicked(QString)), SLOT(removeClicked(QString)));
 
@@ -153,7 +154,9 @@ void Widget::leaveEvent(QEvent *event)
 	m_mouseInside = false;
 
 	foreach(Label *label, m_timedOut) {
-		removeLabel(label);
+		if(label) {
+			removeLabel(label);
+		}
 	}
 
 	m_timedOut.clear();
@@ -173,7 +176,9 @@ void Widget::maybeRemove()
 void Widget::removeClicked(const QString &url)
 {
 	if(Label *label = qobject_cast<Label*>(sender())) {
-		removeLabel(label);
+		if(!m_timedOut.contains(label)) {
+			removeLabel(label);
+		}
 	}
 
 	emit linkClicked(url);
@@ -181,12 +186,13 @@ void Widget::removeClicked(const QString &url)
 
 void Widget::removeLabel(Label *label)
 {
-	m_layout->removeWidget(label);
-	delete label;
+	if(label) {
+		label->setParent(0);
+		label->deleteLater();
+	}
 
 	m_centralWidget->adjustSize();
 	adjustSize();
-
 	if(!m_layout->count()) {
 		hide();
 	}

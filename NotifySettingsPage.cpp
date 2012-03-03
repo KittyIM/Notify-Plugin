@@ -63,7 +63,12 @@ void SettingsPage::reset()
 
 void SettingsPage::retranslate()
 {
+	//this is a stupid workaround, probably only way
+	int pos = m_ui->positionComboBox->currentIndex();
+
 	m_ui->retranslateUi(this);
+
+	m_ui->positionComboBox->setCurrentIndex(pos);
 }
 
 void SettingsPage::previewTheme()
