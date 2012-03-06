@@ -59,6 +59,7 @@ namespace Notify
 			void resizeEvent(QResizeEvent *event);
 			void enterEvent(QEvent *event);
 			void leaveEvent(QEvent *event);
+			void mousePressEvent(QMouseEvent *event);
 
 		private slots:
 			void maybeRemove();

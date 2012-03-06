@@ -8,6 +8,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QGridLayout>
+#include <QtGui/QMouseEvent>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QLabel>
 
@@ -162,6 +163,18 @@ void Widget::leaveEvent(QEvent *event)
 	m_timedOut.clear();
 }
 
+void Widget::mousePressEvent(QMouseEvent *event)
+{
+	QWidget::mousePressEvent(event);
+
+	if(event->button() == Qt::LeftButton) {
+		m_timedOut.clear();
+		foreach(Label *label, findChildren<Label*>()) {
+			removeLabel(label);
+		}
+	}
+}
+
 void Widget::maybeRemove()
 {
 	if(Label *label = qobject_cast<Label*>(sender())) {
@@ -187,6 +200,8 @@ void Widget::removeClicked(const QString &url)
 void Widget::removeLabel(Label *label)
 {
 	if(label) {
+		m_timedOut.removeAll(label);
+
 		label->setParent(0);
 		label->deleteLater();
 	}
