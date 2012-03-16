@@ -26,6 +26,7 @@ Label::Label(const QPixmap &icon, const QString &text, int timeout)
 	}
 
 	m_text = new QLabel(text, this);
+	m_text->installEventFilter(this);
 	connect(m_text, SIGNAL(linkActivated(QString)), SIGNAL(linkClicked(QString)));
 	m_timeout = timeout;
 
@@ -38,6 +39,16 @@ Label::Label(const QPixmap &icon, const QString &text, int timeout)
 		QTimer::singleShot(timeout, this, SIGNAL(timeout()));
 	}
 }
+
+bool Label::eventFilter(QObject *obj, QEvent *event)
+{
+	if(event->type() == QEvent::MouseButtonRelease) {
+		emit clicked();
+	}
+
+	return QFrame::eventFilter(obj, event);
+}
+
 
 Widget::Widget(QWidget *parent):
 	QWidget(parent, Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint),
@@ -65,6 +76,7 @@ void Widget::addNotify(const QPixmap &icon, const QString &text, int timeout)
 {
 	QPointer<Label> label = new Label(icon, "<style type=\"text/css\">" + styleSheet() + "</style>" + text, timeout);
 	connect(label, SIGNAL(timeout()), SLOT(maybeRemove()));
+	connect(label, SIGNAL(clicked()), SLOT(removeAll()));
 	connect(label, SIGNAL(linkClicked(QString)), SLOT(removeClicked(QString)));
 
 	if((m_limit > 0) && (m_layout->count() >= m_limit)) {
@@ -163,18 +175,6 @@ void Widget::leaveEvent(QEvent *event)
 	m_timedOut.clear();
 }
 
-void Widget::mousePressEvent(QMouseEvent *event)
-{
-	QWidget::mousePressEvent(event);
-
-	if(event->button() == Qt::LeftButton) {
-		m_timedOut.clear();
-		foreach(Label *label, findChildren<Label*>()) {
-			removeLabel(label);
-		}
-	}
-}
-
 void Widget::maybeRemove()
 {
 	if(Label *label = qobject_cast<Label*>(sender())) {
@@ -210,6 +210,14 @@ void Widget::removeLabel(Label *label)
 	adjustSize();
 	if(!m_layout->count()) {
 		hide();
+	}
+}
+
+void Widget::removeAll()
+{
+	m_timedOut.clear();
+	foreach(Label *label, findChildren<Label*>()) {
+		removeLabel(label);
 	}
 }
 

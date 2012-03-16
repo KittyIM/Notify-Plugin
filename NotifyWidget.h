@@ -17,7 +17,11 @@ namespace Notify
 
 		signals:
 			void timeout();
+			void clicked();
 			void linkClicked(const QString &url);
+
+		protected:
+			bool eventFilter(QObject *obj, QEvent *event);
 
 		private:
 			QLabel *m_icon;
@@ -59,12 +63,12 @@ namespace Notify
 			void resizeEvent(QResizeEvent *event);
 			void enterEvent(QEvent *event);
 			void leaveEvent(QEvent *event);
-			void mousePressEvent(QMouseEvent *event);
 
 		private slots:
 			void maybeRemove();
 			void removeClicked(const QString &url);
 			void removeLabel(Label *label);
+			void removeAll();
 
 		private:
 			bool m_mouseInside;
